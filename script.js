@@ -6,7 +6,17 @@ canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
 
 var defaultX = canvas.width/3;
-
+//check if the user has granted permission to use audio devices
+navigator.mediaDevices.getUserMedia({ audio: true })
+.then(function(stream) {
+  //permission has been granted, so play the audio
+  var audioElement = new Audio('disorder.mp3');
+  audioElement.play();
+})
+.catch(function(error) {
+  //permission has been denied, so handle the error
+  console.log('Error:', error);
+});
 draw();
 function draw(time){
 	requestAnimationFrame(draw);
